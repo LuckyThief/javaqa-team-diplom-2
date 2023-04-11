@@ -35,13 +35,13 @@ public class CreditAccountTest {
     public void shouldPayIfAmountLessThanBalanceAndLimit() {
         CreditAccount account = new CreditAccount(
                 3_000,
-                5_000,
+                6_000,
                 15
         );
 
-        account.pay(7_000);
+        account.pay(8_000);
 
-        Assertions.assertEquals(-4_000, account.getBalance());
+        Assertions.assertEquals(1_000, account.getBalance());
     }
 
     @Test //Должна пройти покупка, если баланс + лимит равен сумме покупки
@@ -67,7 +67,7 @@ public class CreditAccountTest {
 
         account.pay(8_001);
 
-        Assertions.assertEquals(3_000, account.getBalance());
+        Assertions.assertEquals(0_000, account.getBalance());
     }
 
     @Test //Не должна пройти покупка, если сумма покупки равна 0
@@ -134,7 +134,7 @@ public class CreditAccountTest {
     public void shouldNotCreateCreditAccountWithNegativeLimit() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            CreditAccount account = new CreditAccount(0, -5_000, 5);
+            CreditAccount account = new CreditAccount(0, -5_000, 1);
         });
     }
 
