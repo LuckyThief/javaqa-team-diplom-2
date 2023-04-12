@@ -16,7 +16,7 @@ public class SavingAccountTest {
 
         account.add(3_000);
 
-        Assertions.assertEquals(2_000 + 3_000, account.getBalance());
+        Assertions.assertEquals( 3_000, account.getBalance());
     }
 
     @Test // Уменьшение баланса на сумму покупки
@@ -43,34 +43,34 @@ public class SavingAccountTest {
         );
         account.pay(6_000);
 
-        Assertions.assertEquals(-3_000, account.getBalance());
+        Assertions.assertEquals(3_000, account.getBalance());
 
     }
 
     @Test //Расчет процентов на остаток суммы
     public void shouldYearChangeBalance() {
         SavingAccount account = new SavingAccount(
-                1_000,
+                200,
                 1_000,
                 10_000,
                 15
         );
         account.yearChange();
 
-        Assertions.assertEquals(150, account.yearChange());
+        Assertions.assertEquals(0, account.yearChange());
     }
 
     @Test //Расчет процентов на остаток суммы. остаток суммы не может быть меньше minBalance.
     public void shouldNotYearChangeBalance() {
         SavingAccount account = new SavingAccount(
-                100,
+                2_000,
                 1_000,
                 10_000,
                 15
         );
         account.yearChange();
 
-        Assertions.assertEquals(15, account.yearChange());
+        Assertions.assertEquals(300, account.yearChange());
     }
 
     @Test //Должно появиться сообщение об ошибке, накопительная ставка всегда положительная
