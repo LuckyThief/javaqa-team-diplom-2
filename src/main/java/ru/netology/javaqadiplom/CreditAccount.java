@@ -8,6 +8,9 @@ package ru.netology.javaqadiplom;
  */
 public class CreditAccount extends Account {
     protected int creditLimit;
+  // protected int initialBalance;
+    // protected int balance;
+
 
     /**
      * Создаёт новый объект кредитного счёта с заданными параметрами.
@@ -19,21 +22,25 @@ public class CreditAccount extends Account {
      * @param rate           - неотрицательное число, ставка кредитования для расчёта долга за отрицательный баланс
      */
     public CreditAccount(int initialBalance, int creditLimit, int rate) {
-        if (creditLimit <= 0) {
-            throw new IllegalArgumentException(
-                    "Накопительная ставка не может быть отрицательной, а у вас: " + rate
-            );
-        }
-        if (initialBalance <= 0) {
-            throw new IllegalArgumentException(
-                    "Накопительная ставка не может быть отрицательной, а у вас: " + rate
-            );
-        }
         if (rate <= 0) {
             throw new IllegalArgumentException(
                     "Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
         }
+        if (creditLimit < 0) {
+            throw new IllegalArgumentException(
+                    "Накопительная ставка не может быть отрицательной, а у вас: " + creditLimit
+            );
+        }
+        if (initialBalance < 0) {
+
+                throw new IllegalArgumentException(
+                "Должно быть сообщение об ошибке, т.к. баланс не может быть отрицательным при создании :"
+                        + initialBalance
+                );
+
+        }
+
         this.balance = initialBalance;
         this.creditLimit = creditLimit;
         this.rate = rate;
@@ -67,7 +74,7 @@ public class CreditAccount extends Account {
     /**
      * Операция пополнения карты на указанную сумму.
      * В результате успешного вызова этого метода, баланс должен увеличиться
-     * на сумму покупки. Если же операция может привести к некорректному
+     * на сумму пополнения. Если же операция может привести к некорректному
      * состоянию счёта, то операция должна
      * завершиться вернув false и ничего не поменяв на счёте.
      *
@@ -81,9 +88,10 @@ public class CreditAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = amount;
+        balance = balance + amount;
         return true;
     }
+
 
     /**
      * Операция расчёта процентов на отрицательный баланс счёта при условии, что
@@ -95,18 +103,14 @@ public class CreditAccount extends Account {
      * @return
      */
 
-
     @Override
     public int yearChange() {
-        if (balance < 0) {
-            return -balance / 100 * rate ;
-        } else {
+        if ( balance >= 0) {
             return 0;
+        } else {
+            return balance / 100 * rate;
         }
     }
+}
 
 
-        public int getCreditLimit () {
-            return creditLimit;
-    }
-    }

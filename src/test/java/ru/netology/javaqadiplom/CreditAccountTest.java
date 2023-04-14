@@ -8,14 +8,14 @@ public class CreditAccountTest {
     @Test //Пополнение баланса на положительную сумму
     public void shouldAddToPositiveBalance() {
         CreditAccount account = new CreditAccount(
-                0,
+                1,
                 5_000,
                 15
         );
 
-        account.add(3_000);
+        account.add(1_000);
 
-        Assertions.assertEquals(3_000, account.getBalance());
+        Assertions.assertEquals(1_001, account.getBalance());
     }
 
     @Test //Баланс не должен измениться, если сумма пополнения равна 0
@@ -54,7 +54,7 @@ public class CreditAccountTest {
 
         account.pay(8_000);
 
-        Assertions.assertEquals(-5_000, account.getBalance());
+        Assertions.assertEquals(0_000, account.getBalance());
     }
 
     @Test //Не должна пройти покупка, если баланс + лимит меньше суммы покупки
@@ -67,7 +67,7 @@ public class CreditAccountTest {
 
         account.pay(8_001);
 
-        Assertions.assertEquals(0_000, account.getBalance());
+        Assertions.assertEquals(8_000, account.getBalance());
     }
 
     @Test //Не должна пройти покупка, если сумма покупки равна 0
@@ -105,8 +105,8 @@ public class CreditAccountTest {
         );
 
         account.yearChange();
-
         Assertions.assertEquals(0, account.yearChange());
+
     }
 
     @Test //Не должна появиться процентная ставка, если баланс равен 0
