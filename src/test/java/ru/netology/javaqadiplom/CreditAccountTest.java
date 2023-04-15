@@ -41,7 +41,7 @@ public class CreditAccountTest {
 
         account.pay(8_000);
 
-        Assertions.assertEquals(1_000, account.getBalance());
+        Assertions.assertEquals(-5_000, account.getBalance());
     }
 
     @Test //Должна пройти покупка, если баланс + лимит равен сумме покупки
@@ -54,7 +54,7 @@ public class CreditAccountTest {
 
         account.pay(8_000);
 
-        Assertions.assertEquals(0_000, account.getBalance());
+        Assertions.assertEquals(-5_000, account.getBalance());
     }
 
     @Test //Не должна пройти покупка, если баланс + лимит меньше суммы покупки
