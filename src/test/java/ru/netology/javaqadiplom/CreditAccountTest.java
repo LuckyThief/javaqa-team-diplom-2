@@ -86,12 +86,12 @@ public class CreditAccountTest {
     @Test //Должна появиться процентная ставка, если баланс отрицательный
     public void shouldAppearRateWithNegativeBalance() {
         CreditAccount account = new CreditAccount(
-                -200,
+                2_000,
                 5_000,
                 15
         );
 
-        account.yearChange();
+        account.pay(2_200);
 
         Assertions.assertEquals(-30, account.yearChange());
     }
