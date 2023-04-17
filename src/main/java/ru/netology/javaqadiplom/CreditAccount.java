@@ -63,7 +63,7 @@ public class CreditAccount extends Account {
             return false;
         }
         balance = balance + creditLimit;
-        if (balance >= amount) {
+        if ( amount <= balance) {
             balance = balance - amount- creditLimit;
             return true;
         } else {
@@ -71,18 +71,22 @@ public class CreditAccount extends Account {
         }
     }
 
-    /**
-     * Операция пополнения карты на указанную сумму.
-     * В результате успешного вызова этого метода, баланс должен увеличиться
-     * на сумму пополнения. Если же операция может привести к некорректному
-     * состоянию счёта, то операция должна
-     * завершиться вернув false и ничего не поменяв на счёте.
-     *
-     * @param amount - сумма пополнения
-     * @param amount
-     * @return true если операция прошла успешно, false иначе.
-     * @return
-     */
+
+
+
+
+            /**
+             * Операция пополнения карты на указанную сумму.
+             * В результате успешного вызова этого метода, баланс должен увеличиться
+             * на сумму пополнения. Если же операция может привести к некорректному
+             * состоянию счёта, то операция должна
+             * завершиться вернув false и ничего не поменяв на счёте.
+             *
+             * @param amount - сумма пополнения
+             * @param amount
+             * @return true если операция прошла успешно, false иначе.
+             * @return
+             */
     @Override
     public boolean add(int amount) {
         if (amount <= 0) {
@@ -108,7 +112,7 @@ public class CreditAccount extends Account {
         if ( balance >= 0) {
             return 0;
         } else {
-            return balance / 100 * rate;
+            return balance * rate / 100;
         }
     }
 }
